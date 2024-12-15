@@ -1,12 +1,12 @@
 const colors = [
-	"#ff6f91",
-	"#ff9671",
-	"#ffc75f",
-	"#f9f871",
-	"#ff4c4c",
-	"#ffcc00"
+	"#87CEEB",
+	"#4682B4",
+	"#1E90FF",
+	"#00BFFF",
+	"#5F9EA0",
+	"#6495ED"
 ];
-const letters = "I LOVE YOU";
+const letters = "I LOVE YOU PEDCUUU";
 let letterIndex = 0;
 
 function getRandomLetter() {
@@ -17,7 +17,7 @@ function getRandomLetter() {
 
 function createFirework(x, y) {
 	const launchHeight =
-			Math.random() * (window.innerHeight / 4) + window.innerHeight / 4;
+		Math.random() * (window.innerHeight / 4) + window.innerHeight / 4;
 	const projectile = document.createElement("div");
 	projectile.classList.add("projectile");
 	document.body.appendChild(projectile);
@@ -25,14 +25,14 @@ function createFirework(x, y) {
 	projectile.style.top = `${y}px`;
 
 	anime({
-			targets: projectile,
-			translateY: -launchHeight,
-			duration: 1200,
-			easing: "easeOutQuad",
-			complete: () => {
-					projectile.remove();
-					createBurst(x, y - launchHeight);
-			}
+		targets: projectile,
+		translateY: -launchHeight,
+		duration: 1200,
+		easing: "easeOutQuad",
+		complete: () => {
+			projectile.remove();
+			createBurst(x, y - launchHeight);
+		}
 	});
 }
 
@@ -42,12 +42,12 @@ function createBurst(x, y) {
 
 	// Letters
 	for (let i = 0; i < numLetters; i++) {
-			createParticle(x, y, false);
+		createParticle(x, y, false);
 	}
 
 	// Sparkles
 	for (let i = 0; i < numSparkles; i++) {
-			createParticle(x, y, true);
+		createParticle(x, y, true);
 	}
 }
 
@@ -57,10 +57,10 @@ function createParticle(x, y, isSparkle) {
 	const instruction = document.querySelector('.instructions').style.display = 'none';
 
 	if (!isSparkle) {
-			el.textContent = getRandomLetter();
-			el.style.color = colors[Math.floor(Math.random() * colors.length)];
+		el.textContent = getRandomLetter();
+		el.style.color = colors[Math.floor(Math.random() * colors.length)];
 	} else {
-			el.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+		el.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
 	}
 
 	el.style.left = `${x}px`;
@@ -78,24 +78,24 @@ function animateParticle(el, isSparkle) {
 	const scale = isSparkle ? Math.random() * 0.5 + 0.5 : Math.random() * 1 + 0.5;
 
 	anime
-			.timeline({
-					targets: el,
-					easing: "easeOutCubic",
-					duration: duration,
-					complete: () => el.remove()
-			})
-			.add({
-					translateX: Math.cos(angle) * distance,
-					translateY: Math.sin(angle) * distance,
-					scale: [0, scale],
-					opacity: [1, 0.9]
-			})
-			.add({
-					translateY: `+=${fallDistance}px`,
-					opacity: [0.9, 0],
-					easing: "easeInCubic",
-					duration: duration / 2
-			});
+		.timeline({
+			targets: el,
+			easing: "easeOutCubic",
+			duration: duration,
+			complete: () => el.remove()
+		})
+		.add({
+			translateX: Math.cos(angle) * distance,
+			translateY: Math.sin(angle) * distance,
+			scale: [0, scale],
+			opacity: [1, 0.9]
+		})
+		.add({
+			translateY: `+=${fallDistance}px`,
+			opacity: [0.9, 0],
+			easing: "easeInCubic",
+			duration: duration / 2
+		});
 }
 
 document.addEventListener("click", (e) => {
