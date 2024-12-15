@@ -6,7 +6,16 @@ const colors = [
 	"#5F9EA0",
 	"#6495ED"
 ];
+
 const letters = "I LOVE YOU PEDCUUU";
+const images = [
+	"./img/image1.jpg",
+	"./img/image2.jpg",
+	"./img/image3.jpg",
+	"./img/image4.jpg",
+	"./img/image5.jpg"
+];
+
 let letterIndex = 0;
 
 function getRandomLetter() {
@@ -49,12 +58,15 @@ function createBurst(x, y) {
 	for (let i = 0; i < numSparkles; i++) {
 		createParticle(x, y, true);
 	}
+
+	// Show gift box after fireworks burst
+	setTimeout(() => createGiftBox(x, y), 1000);
 }
 
 function createParticle(x, y, isSparkle) {
 	const el = document.createElement("div");
 	el.classList.add(isSparkle ? "sparkle" : "particule");
-	const instruction = document.querySelector('.instructions').style.display = 'none';
+	document.querySelector('.instructions').style.display = 'none';
 
 	if (!isSparkle) {
 		el.textContent = getRandomLetter();
@@ -98,9 +110,28 @@ function animateParticle(el, isSparkle) {
 		});
 }
 
+function createGiftBox(x, y) {
+	const box = document.createElement("div");
+	box.classList.add("gift-box");
+	box.style.left = `${x}px`;
+	box.style.top = `${y}px`;
+	document.body.appendChild(box);
+
+	box.addEventListener("click", () => {
+		const img = document.createElement("img");
+		img.src = images[Math.floor(Math.random() * images.length)];
+		img.classList.add("gift-image");
+		document.body.appendChild(img);
+		img.style.left = `${x}px`;
+		img.style.top = `${y}px`;
+
+		// Remove the box after clicking
+		box.remove();
+	});
+}
+
 document.addEventListener("click", (e) => {
 	createFirework(e.clientX, e.clientY);
-
 });
 
 window.onload = function () {

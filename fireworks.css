@@ -51,3 +51,45 @@ body {
   transform: scale(0);
   opacity: 0;
 }
+
+.gift-box {
+  position: absolute;
+  width: 50px;
+  height: 50px;
+  background: #ff9671;
+  border: 3px solid #ff6f61;
+  border-radius: 10%;
+  cursor: pointer;
+  box-shadow: 0 0 15px rgba(255, 107, 107, 0.7);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.gift-box::before {
+  content: "+";
+  color: white;
+  font-size: 1.5rem;
+  font-weight: bold;
+  text-align: center;
+}
+
+.gift-image {
+  position: absolute;
+  width: 150px;
+  height: auto;
+  border: 5px solid #ffffff;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.6);
+  animation: fade-in 0.5s ease;
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+    transform: scale(0.5);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
